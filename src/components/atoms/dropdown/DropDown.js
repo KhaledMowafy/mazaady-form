@@ -1,7 +1,8 @@
-import { Label } from "../typography/Typography"
-function DropDown({title, category}) {
+import { Label } from "../../typography/Typography"
+function DropDown({data, title, category, loading, error}) {
+  console.log(data)
   return (
-    <div className="flex flex-col w-5/6">
+    <div className="flex flex-col w-full">
     <Label label={`${category}`}>{title}</Label>
     <select id={`${category}`} className="rounded p-3 w-full">
       <option value="" className="">Select an option...</option>
