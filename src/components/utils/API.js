@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://staging.mazaady.com/api/v1';
+const Token = '3%o8i}_;3D4bF]G5@22r2)Et1&mLJ4?$@+16';
 
 export const readAll = async (path) => {
     
         try {
-            const token = localStorage.getItem("accessToken");
             const authAxios = axios.create({
                 headers: {
                     'Accept': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'private-key': `${Token}`
                 }
             })
             const response = await authAxios.get(`${BASE_URL}${path}`)

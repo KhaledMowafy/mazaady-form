@@ -1,10 +1,9 @@
 "use client"
-import { useEffect, useState } from 'react';
+
 import DropDown from './DropDown';
-import API from '../../utils/API';
 import useApiServices from '@/components/utils/useApiServices';
 
-function DropDownAPI({title, category}) {
+function DropDownWrapper({title, category}) {
 
     const {data, loading, error} = useApiServices({path:'/get_all_cats', CRUD:'get'})
     
@@ -15,4 +14,4 @@ function DropDownAPI({title, category}) {
   )
 }
 
-export default DropDownAPI
+export default DropDownWrapper

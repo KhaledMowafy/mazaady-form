@@ -20,7 +20,7 @@ function useApiServices({ path, CRUD }) {
     }
   }, [path, CRUD]);
 
-  return [data, loading, error];
+  return {data, loading, error};
 }
 
 export default useApiServices;
