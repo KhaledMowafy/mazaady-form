@@ -1,4 +1,5 @@
-import MainForm from "@/components/molecules/mainform/MainForm";
+import MainForm from '../components/organisms/MainForm';
+
 export default function Home() {
 
   return (

@@ -7,20 +7,13 @@ function useApiServices({ path, CRUD, id='' }) {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (CRUD === "get") {
-      readAll(path)
-        .then((response) => {
-          setData(response);
-          setLoading(false);
-        })
-        .catch((err) => {
-          setError(err);
-          setLoading(false);
-        });
-    }else if(CRUD==='getID'&& id!==''){
+   if(CRUD==='getID'&& id!==''){
       readAll(`${path}`)
       .then((response) => {
         setData(response);
+        if(response.data.options!==undefined){
+            
+        }
         setLoading(false);
       })
       .catch((err) => {
@@ -28,7 +21,7 @@ function useApiServices({ path, CRUD, id='' }) {
         setLoading(false);
       });
     }
-  }, [path, CRUD, id]);
+  }, [path, CRUD]);
 
   return {data, loading, error};
 }
