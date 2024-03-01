@@ -5,8 +5,11 @@ import Input from "@/components/atoms/input/Input";
 function PropertiesForm({ title, category, options, setEntireData, entireData }) {
 
   const [property, setProperty] = useState();
-  const {data, loading, error} = useApiServices({path:`/get-options-child/${property}`, CRUD:'getID', id:property})
+  const {data} = useApiServices({path:`/get-options-child/${property}`, CRUD:'getID', id:property})
 
+  const handleOther = (e, otherTitle)=>{
+    setEntireData({...entireData, [otherTitle]: e.target.value})
+  }
   return (
     <div>
       <Properties
@@ -17,7 +20,7 @@ function PropertiesForm({ title, category, options, setEntireData, entireData })
         setEntireData={setEntireData}
         entireData={entireData}
       />
-      {property==='other'?<Input title={`Other - ${title}`} category={`other-${category}`}/>:''}
+      {property==='other'?<Input title={`Other - ${title}`} category={`other-${category}`} onChange={handleOther}/>:''}
       
       {property!=='other'&&data?.data.length>0&&data?.data[0].options!==undefined&&
         <PropertiesForm title={data.data[0].name} category={data.data[0].name} options={data.data[0].options} setEntireData={setEntireData} entireData={entireData}/>

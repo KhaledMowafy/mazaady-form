@@ -5,14 +5,13 @@ import Properties from '@/components/atoms/properties/Properties';
 import PropertiesForm from '../propertiesform/PropertiesForm';
 function SubForm({childs, setEntireData, entireData}) {
     const [sub, setSub] = useState('');
-    const [property, setProperty] = useState('')
-    const {data, loading, error} = useApiServices({path:`/properties?cat=${sub}`, CRUD:'getID', id:sub})
+    const {data} = useApiServices({path:`/properties?cat=${sub}`, CRUD:'getID', id:sub})
 
   return (
     <div>
        <SubCategory title="Sub Category" category="subCategory" childs={childs} setSub={setSub} setEntireData={setEntireData} entireData={entireData}/>
        {data?.data&&data?.data.map((item)=>(
-        <PropertiesForm title={item.name} category={`properties-${item.id}`} options={item.options} key={item.id} setProperty={setProperty} setEntireData={setEntireData} entireData={entireData}/>
+        <PropertiesForm title={item.name} category={`properties-${item.id}`} options={item.options} key={item.id} setEntireData={setEntireData} entireData={entireData}/>
        ))}
     </div>
   )

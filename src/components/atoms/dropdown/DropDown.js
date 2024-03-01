@@ -5,7 +5,7 @@ function DropDown({ data, title, category, loading, setEntireData, setCategory, 
   const handleSelectedCategory = (e)=>{
 
     setCategory(e.target.value); 
-    setEntireData({...entireData, 'category': e.target[e.target.selectedIndex].innerText})
+    setEntireData({'category': e.target[e.target.selectedIndex].innerText})
   }
 
   return (
