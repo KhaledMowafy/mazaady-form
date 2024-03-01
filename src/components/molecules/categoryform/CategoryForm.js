@@ -4,8 +4,7 @@ import DropDown from "@/components/atoms/dropdown/DropDown";
 import useApiServices from "@/components/utils/useApiServices";
 import {useEffect} from 'react';
 
-
-function CategoryForm({setCategory, category, setChildren}) {
+function CategoryForm({setCategory, category, setChildren, setEntireData, entireData}) {
    
     const {data, loading, error} = useApiServices({path:'/get_all_cats', CRUD:'get'})
 
@@ -16,7 +15,7 @@ function CategoryForm({setCategory, category, setChildren}) {
 
   return (
    <div className="w-full">
-      <DropDown data={data} title={'Main Category'} category={'MainForm'} loading={loading} error={error} setCategory={setCategory}/>
+      <DropDown data={data} title={'Main Category'} category={'MainForm'} loading={loading} error={error} setCategory={setCategory} setEntireData={setEntireData} entireData={entireData}/>
     </div>
   )
 }

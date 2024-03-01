@@ -1,29 +1,31 @@
-import { useState, useEffect } from "react";
-import { readAll } from "./API";
+import {useState, useRef, useEffect} from 'react';
 
-function useApiServices({ path, CRUD, id='' }) {
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-   if(CRUD==='getID'&& id!==''){
-      readAll(`${path}`)
-      .then((response) => {
-        setData(response);
-        if(response.data.options!==undefined){
-            
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err);
-        setLoading(false);
-      });
-    }
-  }, [path, CRUD]);
-
-  return {data, loading, error};
-}
-
-export default useApiServices;
+export function useLocalStorage(
+    key, 
+    defaultValue='',
+    {serialize = JSON.stringify, deserialize = JSON.parse} = {},
+  ){
+  
+    const [state, setState] = useState(()=>{
+      
+      const valueInLocalStorage = window.localStorage.getItem(key)
+      if(valueInLocalStorage){
+        return deserialize(valueInLocalStorage)
+      }
+      return defaultValue;
+    })
+  
+   const prevKeyRef = useRef(key)
+  
+    useEffect(()=>{
+      const previousKey = prevKeyRef.current
+      if(previousKey !== key){
+        localStorage.removeItem(previousKey);
+      }
+      prevKeyRef.current=key;
+  
+      window.localStorage.setItem(key, serialize(state))
+    },[key, state, serialize])
+  
+    return [state, setState];
+  }
