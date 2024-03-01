@@ -1,4 +1,4 @@
-import MainForm from '../components/organisms/MainForm';
+import MainForm from '../components/organisms/mainform/MainForm';
 
 export default function Home() {
 

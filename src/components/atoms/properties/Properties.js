@@ -6,7 +6,9 @@ function Properties({title, category, options, setProperty='', setEntireData, en
   const handleSelectedProperty = (e)=>{
 
     setProperty(e.target.value); 
+    if(e.target[e.target.selectedIndex].innerText!=='Other'){
     setEntireData({...entireData, [title]: e.target[e.target.selectedIndex].innerText})
+  }
   }
 
   return (
