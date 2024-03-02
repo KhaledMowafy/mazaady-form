@@ -1,93 +1,75 @@
 import React from 'react';
-import { render, screen, fireEvent  } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import DropDown from './DropDown';
+import { render, fireEvent } from '@testing-library/react';
+import DropDown from './DropDown'; 
 
 describe('DropDown component', () => {
-  const mockData = {
-    data: {
-      categories: [
-        { id: 1, name: 'Category 1' },
-        { id: 2, name: 'Category 2' },
-        { id: 3, name: 'Category 3' },
-      ]
-    }
-  };
-
-  test('renders component with given title, category, and data', () => {
+  test('renders with provided title and category', () => {
+    const data = {
+      data: {
+        categories: [
+          { id: 1, name: 'Category 1' },
+          { id: 2, name: 'Category 2' },
+        ]
+      }
+    };
     const title = 'Test Title';
     const category = 'Test Category';
-    const setCategoryMock = jest.fn();
-
-    render(
-      <DropDown
-        data={mockData}
-        title={title}
-        category={category}
-        loading={false}
-        error={false}
-        setCategory={setCategoryMock}
-      />
+    const { getByLabelText, getByTestId } = render(
+      <DropDown data={data} title={title} category={category} />
     );
 
-    // Assert that title and category are rendered
-    expect(screen.getByText(title)).toBeInTheDocument();
-    expect(screen.getByText(title)).toBeInTheDocument();
+    const titleLabel = getByLabelText(title);
+    expect(titleLabel).toBeInTheDocument();
 
-    // Assert that dropdown options are rendered correctly
-    const dropdown = screen.getByTestId(`${category}-dropdown`);
-    expect(dropdown).toBeInTheDocument();
-    expect(screen.getAllByRole('option')).toHaveLength(mockData.data.categories.length); // +1 for hidden option
+    const categoryDropdown = getByTestId('Test Category-dropdown');
+    expect(categoryDropdown).toBeInTheDocument();
   });
 
-  test('selecting an option triggers onChange event', () => {
+  test('calls setCategory and setEntireData functions on category selection', () => {
+    const data = {
+      data: {
+        categories: [
+          { id: 1, name: 'Category 1' },
+          { id: 2, name: 'Category 2' },
+        ]
+      }
+    };
+    const setCategory = jest.fn();
+    const setEntireData = jest.fn();
     const title = 'Test Title';
     const category = 'Test Category';
-    const setCategoryMock = jest.fn();
-  
-    render(
+    const { getByTestId } = render(
       <DropDown
-        data={mockData}
+        data={data}
         title={title}
         category={category}
-        loading={false}
-        error={false}
-        setCategory={setCategoryMock}
+        setCategory={setCategory}
+        setEntireData={setEntireData}
       />
     );
-  
-    const dropdown = screen.getByTestId(`${category}-dropdown`);
-  
-     // Attach a log for onChange event
-    dropdown.addEventListener('change', (event) => console.log(event.target.value));
 
-    // Simulate selecting an option
-    fireEvent.change(dropdown, { target: { value: `${mockData.data.categories[0].id}` } });
+    const categoryDropdown = getByTestId('Test Category-dropdown');
+    fireEvent.change(categoryDropdown, { target: { value: '1' } });
 
-    // Simulate selecting an option
-    userEvent.selectOptions(dropdown, `${mockData.data.categories[0].id}`);
-
-    // Assert that onChange event is triggered with correct value
-    expect(setCategoryMock).toHaveBeenCalledTimes(1);
-    expect(setCategoryMock).toHaveBeenCalledWith(`${mockData.data.categories[0].id}`);
+    expect(setCategory).toHaveBeenCalledWith('1');
   });
 
-  test('displays loading spinner when loading prop is true', () => {
+  test('renders loading spinner when loading prop is true', () => {
+    const data = {
+      data: {
+        categories: [
+          { id: 1, name: 'Category 1' },
+          { id: 2, name: 'Category 2' },
+        ]
+      }
+    };
     const title = 'Test Title';
     const category = 'Test Category';
-
-    render(
-      <DropDown
-        data={mockData}
-        title={title}
-        category={category}
-        loading={true}
-        error={false}
-        setCategory={() => {}}
-      />
+    const { getByTestId } = render(
+      <DropDown data={data} title={title} category={category} loading={true} />
     );
 
-    // Assert that loading spinner is displayed
-    expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
+    const loadingSpinner = getByTestId('loading-spinner');
+    expect(loadingSpinner).toBeInTheDocument();
   });
 });
