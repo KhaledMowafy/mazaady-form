@@ -33,6 +33,11 @@
 <p>Select an option from the main dropdown menu.
 If the selected option has children, the nested children options will be fetched and displayed in the dropdown.
 Selecting a child option with children will trigger the same behavior recursively, allowing for nested dropdowns.
-Dependencies</p>
+Once you are done click on submit to view a full table with your choices.</p>
+
+<h3>Dependencies</h3>
 <p><strong>Next.js:</strong> A React framework for building server-side rendered and static web applications.</p>
 <p><strong>Tailwind CSS:</strong> A utility-first CSS framework for building responsive web designs quickly.</p>
+<p><strong>Axios:</strong> Popular JavaScript library used for making HTTP requests from both the browser and Node.js environments.</p>
+<p><strong>React-Spinners:</strong> Library providing customizable loading spinner components for React applications.</p>
+<p><strong>Jest:</strong> JavaScript testing framework commonly used for unit testing React applications, providing a simple and efficient way to write and execute tests.</p>
