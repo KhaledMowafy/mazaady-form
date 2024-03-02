@@ -18,28 +18,21 @@
 <h2>Navigate to the project directory:</h2>
 
 <pre><code>cd nested-dropdown-nextjs</pre></code>
-Install dependencies:
 
-bash
-Copy code
-npm install
-Run the development server:
+<h2>Install dependencies:</h2>
 
-bash
-Copy code
-npm run dev
-Open your browser and visit http://localhost:3000 to view the app.
+<pre><code>npm install</pre></code>
 
-Usage
-Select an option from the main dropdown menu.
+<h2>Run the development server:</h2>
+
+<pre><code>npm run dev</pre></code>
+
+<h3>Open your browser and visit http://localhost:3000 to view the app.</h3>
+
+<h2>Usage</h2>
+<p>Select an option from the main dropdown menu.
 If the selected option has children, the nested children options will be fetched and displayed in the dropdown.
 Selecting a child option with children will trigger the same behavior recursively, allowing for nested dropdowns.
-Dependencies
-React.js: A JavaScript library for building user interfaces.
-Next.js: A React framework for building server-side rendered and static web applications.
-Tailwind CSS: A utility-first CSS framework for building responsive web designs quickly.
-Contributing
-Contributions are welcome! Please feel free to submit issues or pull requests.
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+Dependencies</p>
+<p><strong>Next.js:</strong> A React framework for building server-side rendered and static web applications.</p>
+<p><strong>Tailwind CSS:</strong> A utility-first CSS framework for building responsive web designs quickly.</p>
